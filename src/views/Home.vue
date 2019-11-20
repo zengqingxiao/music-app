@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <span>home</span>
+    <span>home111</span>
   </div>
 </template>
 
@@ -9,9 +9,9 @@
 // import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "home",
+  name: 'home',
   components: {}
-};
+}
 </script>
 <style lang="scss" scoped>
 .home {
