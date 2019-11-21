@@ -1,16 +1,23 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "@/views/Home.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from '@/views/Home.vue'
+import PlayListView from '@/views/playListView.vue' // 全部歌单
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: "/",
-      name: "home",
+      path: '/',
+      name: 'home',
       component: Home
+    },
+    {
+      path: '/playListView',
+      name: 'playListView',
+      component: PlayListView
     }
+
     // {
     //   path: "/about",
     //   name: "about",
@@ -21,4 +28,4 @@ export default new Router({
     //     import(/* webpackChunkName: "about" */ "./views/About.vue") // 懒加载
     // }
   ]
-});
+})

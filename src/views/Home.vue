@@ -1,9 +1,9 @@
 <template>
 <div>
   <div class="header">
-    <div class="personal">我的</div>
+    <div class="personal" @click="goToUserCenter">我的</div>
     <div>MIKO</div>
-    <i class="iconfont icon-chaxun"></i>
+    <i class="iconfont icon-chaxun" @click="goToSearch"></i>
   </div>
   <div class="swiper-content home-item">
     <swiper :options="swiperOption">
@@ -13,19 +13,19 @@
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
     <ul class="nav">
-      <li>
+      <li @click="goToRecommend">
         <div class="icon-container">
           <i class="iconfont icon-date icon"></i>
         </div>
         <p>每日推荐</p>
       </li>
-      <li>
+      <li @click="goToPlayList">
         <div class="icon-container">
           <i class="iconfont icon-music-list icon"></i>
         </div>
         <p>歌单</p>
       </li>
-      <li>
+      <li @click="goToRank">
         <div class="icon-container">
           <i class="iconfont icon-rank icon"></i>
         </div>
@@ -38,13 +38,24 @@
       <div class="title">
         每日推荐
       </div>
-      <div class="more">
+      <div class="more" @click="goToPlayList">
         <i class="iconfont icon-more"></i>
       </div>
     </div>
     <div class="play-list-wrapper">
-      <play-list :data="playListData"></play-list>
+      <play-list :data="playListData" @clickItem="goToPlayListInfo"></play-list>
     </div>
+  </div>
+  <div class="home-item">
+    <div class="title-wrapper">
+      <div class="title">
+        热门歌手
+      </div>
+      <div class="more" @click="goToArtists">
+        <i class="iconfont icon-more"></i>
+      </div>
+    </div>
+    <artist-list :data="artistsData" @clickItem="goToArtistsInfo"></artist-list>
   </div>
 </div>
 </template>
@@ -52,10 +63,12 @@
 <script>
 import axios from 'axios'
 import PlayList from '../components/playList'
+import ArtistList from '../components/artistList'
 export default {
   name: 'home',
   components: {
-    PlayList
+    PlayList,
+    ArtistList
   },
   data () {
     return {
@@ -65,12 +78,14 @@ export default {
         }
       },
       newSongData: [], // 头部轮播图
-      playListData: [] // 每日推荐
+      playListData: [], // 每日推荐
+      artistsData: [] // 热们歌手
     }
   },
   created () {
     this.getNewSongs()
     this.getPlayList()
+    this.getArtists()
   },
   methods: {
     // 头部轮播图
@@ -86,6 +101,64 @@ export default {
       if (data.code === 200) {
         this.playListData = data.result.slice(0, 6)
       }
+    },
+    // 热们歌手
+    async getArtists () {
+      const { data } = await axios.get('/api/top/artists?limit=10')
+      if (data.code === 200) {
+        this.artistsData = data.artists
+      }
+    },
+    // 每日推荐路由跳转
+    goToRecommend () {
+      this.$router.push({
+        name: 'recommend'
+      })
+    },
+    // 歌单
+    goToPlayList () {
+      this.$router.push({
+        name: 'playListView'
+      })
+    },
+    // 排行榜
+    goToRank () {
+      this.$router.push({
+        name: 'rank'
+      })
+    },
+    goToArtists () {
+      this.$router.push({
+        name: 'artists'
+      })
+    },
+    goToPlayListInfo (item) {
+      this.$router.push({
+        name: 'playListInfo',
+        params: {
+          id: item.id
+        }
+      })
+    },
+    goToArtistsInfo (item) {
+      this.$router.push({
+        name: 'ArtistsInfo',
+        params: {
+          id: item.id
+        }
+      })
+    },
+    // 点击收索
+    goToSearch () {
+      this.$router.push({
+        name: 'search'
+      })
+    },
+    // 点击我的
+    goToUserCenter () {
+      this.$router.push({
+        name: 'userCenter'
+      })
     }
   }
 }

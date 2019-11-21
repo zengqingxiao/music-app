@@ -1,8 +1,9 @@
 html{
   background-color: #f3f4f9;
 }
+/* 图片懒加载样式 */
 img[lazy=loading] {
-  transform: scale(.3);
+  transform: scale(.2); 
 }
 .page-info-list{
   height: calc(100vh - 490px);
