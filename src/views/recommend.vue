@@ -1,4 +1,5 @@
 <template>
+<!-- 每日推荐跳转 -->
   <div class="page">
     <Top :title="title" :img="img" :count="formatData.length"></Top>
     <Scroll :data="formatData" class="page-info-list">
