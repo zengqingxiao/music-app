@@ -1,9 +1,9 @@
 <template>
 <div>
-    <div class="header">
-      <div class="personal">我的</div>
-      <div>MIKO</div>
-      <i class="iconfont icon-chaxun"></i>
+  <div class="header">
+    <div class="personal">我的</div>
+    <div>MIKO</div>
+    <i class="iconfont icon-chaxun"></i>
   </div>
   <div class="swiper-content home-item">
     <swiper :options="swiperOption">
@@ -33,14 +33,30 @@
       </li>
     </ul>
   </div>
+  <div class="home-item">
+    <div class="title-wrapper">
+      <div class="title">
+        每日推荐
+      </div>
+      <div class="more">
+        <i class="iconfont icon-more"></i>
+      </div>
+    </div>
+    <div class="play-list-wrapper">
+      <play-list :data="playListData"></play-list>
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import PlayList from '../components/playList'
 export default {
   name: 'home',
-  components: {},
+  components: {
+    PlayList
+  },
   data () {
     return {
       swiperOption: {
@@ -48,11 +64,13 @@ export default {
           el: '.swiper-pagination'
         }
       },
-      newSongData: []
+      newSongData: [], // 头部轮播图
+      playListData: [] // 每日推荐
     }
   },
   created () {
     this.getNewSongs()
+    this.getPlayList()
   },
   methods: {
     // 头部轮播图
@@ -60,6 +78,13 @@ export default {
       const { data } = await axios.get('/api/personalized/newsong')
       if (data.code === 200) {
         this.newSongData = data.result
+      }
+    },
+    // 每日推荐
+    async getPlayList () {
+      const { data } = await axios.get('/api/personalized')
+      if (data.code === 200) {
+        this.playListData = data.result.slice(0, 6)
       }
     }
   }
