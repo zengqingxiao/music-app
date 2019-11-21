@@ -10,6 +10,7 @@
   "dependencies": {
     "@vue/eslint-config-standard": "^5.0.0",
     "axios": "^0.19.0",
+    "better-scroll": "^1.15.2",
     "core-js": "^2.6.5",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.18.2",

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home.vue'
 import PlayListView from '@/views/playListView.vue' // 全部歌单
+import Recommend from '@/views/recommend.vue' // 每日推荐跳转
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/playListView',
       name: 'playListView',
       component: PlayListView
+    },
+    {
+      path: '/recommend',
+      name: 'recommend',
+      component: Recommend
     }
 
     // {
