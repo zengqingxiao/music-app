@@ -12,13 +12,31 @@
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
+    <ul class="nav">
+      <li>
+        <div class="icon-container">
+          <i class="iconfont icon-date icon"></i>
+        </div>
+        <p>每日推荐</p>
+      </li>
+      <li>
+        <div class="icon-container">
+          <i class="iconfont icon-music-list icon"></i>
+        </div>
+        <p>歌单</p>
+      </li>
+      <li>
+        <div class="icon-container">
+          <i class="iconfont icon-rank icon"></i>
+        </div>
+        <p>排行榜</p>
+      </li>
+    </ul>
   </div>
 </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
 import axios from 'axios'
 export default {
   name: 'home',
