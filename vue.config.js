@@ -5,7 +5,7 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
-        changeOrigin: false,
+        changeOrigin: false, // 允许跨域
         pathRewrite: {
           '/api': '/'
         }
