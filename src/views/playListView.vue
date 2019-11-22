@@ -4,12 +4,12 @@
       <m-header>
         全部歌单
       </m-header>
-      <div class="play-wrapper">
+
+      <scroll :data="playListData" class="page-view-list">
+        <div class="play-wrapper">
         <play-list :data="playListData" @clickItem="goToPlayListInfo"></play-list>
       </div>
-      <!-- <scroll :data="playListData" class="page-view-list">
-
-      </scroll> -->
+      </scroll>
     </div>
     <!-- <loading v-else></loading> -->
     <!-- <transition name="slide">
@@ -23,12 +23,14 @@
 import axios from 'axios'
 import mHeader from '../components/mHeader'
 import PlayList from '../components/playList'
+import Scroll from '@/components/scroll.vue'
 
 export default {
   name: 'play-list-view',
   components: {
     mHeader,
-    PlayList
+    PlayList,
+    Scroll
   },
   data () {
     return {
