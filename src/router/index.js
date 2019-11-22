@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import PlayListView from '@/views/playListView.vue' // 全部歌单
 import Recommend from '@/views/recommend.vue' // 每日推荐跳转
 import Rank from '@/views/rank.vue' // 排行榜
+import Artists from '@/views/artists' // 热们歌手
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,11 @@ export default new Router({
       path: '/rank',
       name: 'rank',
       component: Rank
+    },
+    {
+      path: '/artists',
+      name: 'artists',
+      component: Artists
     }
 
     // {
