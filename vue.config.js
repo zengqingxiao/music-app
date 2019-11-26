@@ -8,7 +8,8 @@ module.exports = {
         changeOrigin: false, // 允许跨域
         pathRewrite: {
           '/api': '/'
-        }
+        },
+        logLevel: 'debug'
       }
     }
   }
