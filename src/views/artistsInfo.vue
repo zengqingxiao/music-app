@@ -32,10 +32,10 @@ export default {
       this.formatData = formatSongDetail(data.hotSongs)
     },
     addToPlay (item, index) {
-      this.SET_FULLSCREEN(true)
-      this.SET_PLAY_LIST(this.formatData)
-      this.SET_SEQUENCE_LIST(this.formatData)
-      this.SET_CURRENT_INDEX(index)
+      this.SET_FULLSCREEN(true) // 改变控制播放器大小
+      this.SET_PLAY_LIST(this.formatData) // 播放列表
+      this.SET_SEQUENCE_LIST(this.formatData) // 最开始的播放排序列表
+      this.SET_CURRENT_INDEX(index) // 当前歌曲所在位置
     }
   }
 }

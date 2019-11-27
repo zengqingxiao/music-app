@@ -125,7 +125,7 @@ export default {
       loaded: false,
       currentTime: 0,
       overTime: 0,
-      touchBarWillMove: false,
+      touchBarWillMove: false, // 是否在移动圆点
       lyricLines: [],
       currentLineNumber: 0,
       playlistShow: false
@@ -150,12 +150,15 @@ export default {
     songImg () {
       return this.currentSong && this.currentSong.al.picUrl ? `${this.currentSong.al.picUrl}?param=400y400` : require('../assets/image/user-bg.png')
     },
+    // 样式标签切换
     playIcon () {
       return this.playing ? 'icon-bofang' : 'icon-zanting'
     },
+    // 图标切换
     modeIcon () {
       return this.mode === playMode.sequence ? 'icon-liebiaoxunhuan' : (this.mode === playMode.loop ? 'icon-danquxunhuan' : 'icon-suiji')
     },
+    // 计算时间比例
     barPercent () {
       let p = this.currentTime / this.overTime
       if (p === 0) {
@@ -190,6 +193,7 @@ export default {
     toggleShow (val) {
       this.SET_FULLSCREEN(val)
     },
+    // 音乐播放地址
     async getMusicUrl (id) {
       const { data } = await axios.get(`/api/song/url?id=${id}`)
       if (data.code === 200 && data.data[0].code === 200) {
@@ -200,6 +204,7 @@ export default {
         })
       }
     },
+    // 歌词播放地址
     async getLyricData (id) {
       const { data } = await axios.get(`/api/lyric?id=${id}`)
       if (data.code === 200 && data.lrc) {
@@ -209,6 +214,7 @@ export default {
         this.lyricData = null
       }
     },
+    // 播放和暂停
     togglePlay (val) {
       if (!this.currentSong) return
       if (val === true || val === false) {
@@ -216,15 +222,16 @@ export default {
       } else {
         this.playing = !this.playing
       }
-      const audio = this.$refs.audio
+      const audio = this.$refs.audio // 去哪子组件的方法
       if (this.playing) {
-        audio.play()
+        audio.play() // 开始播放, 固定方法
       } else {
-        audio.pause()
+        audio.pause() // 暂停
       }
     },
+    // 歌曲切换
     prev () {
-      if (!this.loaded) return
+      if (!this.loaded) return // 当点击上一曲的时候，防止点击下一曲而冲突卡顿
       this.loaded = false
       const len = this.playList.length
       let newIndex = this.currentIndex - 1
@@ -233,8 +240,9 @@ export default {
       }
       this.SET_CURRENT_INDEX(newIndex)
     },
+    // 歌曲切换
     next () {
-      if (!this.loaded) return
+      if (!this.loaded) return // 当点击上一曲的时候，防止点击下一曲而冲突卡顿
       this.loaded = false
       const len = this.playList.length
       let newIndex = this.currentIndex + 1
@@ -243,28 +251,34 @@ export default {
       }
       this.SET_CURRENT_INDEX(newIndex)
     },
+    // 模式切换,后数据的处理
     changeMode () {
       const modeNumber = (this.mode + 1) % 3
       this.SET_MODE(modeNumber)
       let newPlayList = []
+      // 如果是随机播放
       if (this.mode === playMode.random) {
         newPlayList = this.getRandomList(this.sequencesList)
       } else {
+        // 新的数组备份
         newPlayList = this.sequencesList
       };
+      // 当前歌曲再新列表的地址
       const newIndex = newPlayList.findIndex(item => item.id === this.currentSong.id)
-      this.SET_PLAY_LIST(newPlayList)
-      this.SET_CURRENT_INDEX(newIndex)
+      this.SET_PLAY_LIST(newPlayList) // 跟新列表数据
+      this.SET_CURRENT_INDEX(newIndex) // 地址数据
     },
     getRandomList (arr) {
       const newArr = [].concat(arr)
+      // 随机排序
       return newArr.sort((a, b) => (Math.random() > 0.5 ? -1 : 1))
     },
+    // 当歌曲播放完成后的操作逻辑
     end () {
       if (this.mode === playMode.loop) {
-        this.loop()
+        this.loop() // 单曲循环
       } else {
-        this.next()
+        this.next() // 下一曲
       }
     },
     loop () {
@@ -272,18 +286,21 @@ export default {
       audio.currenTime = 0
       audio.play()
     },
+
     songLoad () {
       this.loaded = true
     },
+    // 在歌曲进行的时候（一直都在执行）
     updateTime (e) {
       if (!this.touchBarWillMove) {
-        this.currentTime = e.target.currentTime
-        this.overTime = e.target.duration
+        this.currentTime = e.target.currentTime // 进行的时间
+        this.overTime = e.target.duration // 结束的时间
       }
       if (this.lyricData) {
         this.moveLyric()
       }
     },
+    // 时间格式转换
     formatTime (val) {
       if (isNaN(val)) return '00:00'
       let m = Math.floor(val / 60)
@@ -301,12 +318,14 @@ export default {
       const pageX = e.touches[0].pageX
       this.calcPercent(pageX)
     },
+    // 点击方法
     progressClick (e) {
       this.touchBarWillMove = true
       const pageX = e.pageX
-      this.calcPercent(pageX)
-      this.resetPlayer()
+      this.calcPercent(pageX) // 计算时间比例
+      this.resetPlayer() // 重新开始给时间唱歌
     },
+    // 计算时间比例
     calcPercent (x) {
       const offsetLeft = this.$refs.progressBar.offsetLeft
       const barWidth = this.$refs.progressBar.clientWidth
@@ -320,6 +339,7 @@ export default {
     progressEnd () {
       this.resetPlayer()
     },
+    // 重新给时间播放歌曲
     resetPlayer () {
       this.$refs.audio.currentTime = this.currentTime
       this.togglePlay(true)

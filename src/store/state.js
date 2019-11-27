@@ -1,4 +1,14 @@
 // 昨天数据
-const satte = {}
+import { playMode } from '../common/js/aliasConfig'
 
-export default satte
+const state = {
+  fullScreen: false, // 控制大小播放器
+  playList: [], // 传入播放列表,这个可以是通过sequencesList传进来的
+  sequencesList: [], // 最开始的排序列
+  currentIndex: 0, // 当前歌曲所在位置
+  mode: playMode.sequence, // 播放的形式
+  historyList: JSON.parse(localStorage.getItem('HistoryList')) || [],
+  loveList: JSON.parse(localStorage.getItem('LoveList')) || [],
+  searchText: JSON.parse(localStorage.getItem('SearchText')) || []
+}
+export default state
