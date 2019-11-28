@@ -31,6 +31,7 @@ export default {
 
 <style lang="scss" scoped>
   .artists-list {
+    margin-bottom: 60px;
 
     li {
       display: flex;

@@ -36,7 +36,7 @@
         </div>
       </scroll>
     </div>
-    <!-- <loading v-else></loading> -->
+    <loading v-else></loading>
     <transition name="slide">
       <router-view></router-view>
     </transition>
@@ -48,14 +48,14 @@
 import axios from 'axios'
 import mHeader from '@/components/mHeader.vue'
 import Scroll from '@/components/scroll.vue'
-// import loading from '@/components/loading.vue'
+import loading from '@/components/loading.vue'
 
 export default {
   name: 'rank',
   components: {
     mHeader,
-    Scroll
-    // loading
+    Scroll,
+    loading
   },
   data () {
     return {

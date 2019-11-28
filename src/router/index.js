@@ -8,6 +8,11 @@ import Rank from '@/views/rank.vue' // 排行榜
 import RankInfo from '@/views/rankInfo' // 排行榜详情
 import Artists from '@/views/artists' // 热们歌手
 import ArtistsInfo from '@/views/artistsInfo' // 热们歌手详情
+import Search from '@/views/search' // 搜索
+import UserCenter from '@/views/userCenter'
+import UserHistoryList from '@/views/userHistoryList'
+import UserLoveList from '@/views/userLoveList'
+import UserPlayList from '@/views/userPlayList'
 Vue.use(Router)
 
 export default new Router({
@@ -51,8 +56,32 @@ export default new Router({
       path: '/artists/:id',
       name: 'ArtistsInfo',
       component: ArtistsInfo
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
+    },
+    {
+      path: '/userCenter',
+      name: 'userCenter',
+      component: UserCenter
+    },
+    {
+      path: '/userHistoryList',
+      name: 'userHistoryList',
+      component: UserHistoryList
+    },
+    {
+      path: '/userLoveList',
+      name: 'userLoveList',
+      component: UserLoveList
+    },
+    {
+      path: '/userPlayList',
+      name: 'userPlayList',
+      component: UserPlayList
     }
-
     // {
     //   path: "/about",
     //   name: "about",

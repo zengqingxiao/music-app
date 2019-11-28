@@ -6,7 +6,7 @@
         <artist-list :data="artistsData" @clickItem="goToArtistsInfo" class="artists"></artist-list>
       </scroll>
     </div>
-    <!-- <loading v-else></loading> -->
+    <loading v-else></loading>
     <transition name="slide">
       <router-view></router-view>
     </transition>
@@ -18,15 +18,15 @@ import mHeader from '@/components/mHeader'
 import ArtistList from '@/components/artistList'
 import axios from 'axios'
 import Scroll from '@/components/scroll'
-// import Loading from '../components/loading'
+import Loading from '../components/loading'
 
 export default {
   name: 'artists',
   components: {
     mHeader,
     ArtistList,
-    Scroll
-    // Loading
+    Scroll,
+    Loading
   },
   data () {
     return {

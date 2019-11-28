@@ -11,10 +11,10 @@
       </div>
       </scroll>
     </div>
-    <!-- <loading v-else></loading> -->
-    <!-- <transition name="slide">
+    <loading v-else></loading>
+    <transition name="slide">
       <router-view></router-view>
-    </transition> -->
+    </transition>
   </div>
 
 </template>
@@ -23,14 +23,16 @@
 import axios from 'axios'
 import mHeader from '../components/mHeader'
 import PlayList from '../components/playList'
-import Scroll from '@/components/scroll.vue'
+import Scroll from '../components/scroll'
+import Loading from '../components/loading'
 
 export default {
   name: 'play-list-view',
   components: {
     mHeader,
     PlayList,
-    Scroll
+    Scroll,
+    Loading
   },
   data () {
     return {
