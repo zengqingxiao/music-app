@@ -44,14 +44,13 @@ export default {
       this.scroll && this.scroll.refresh()
     },
     scrollToElement (el, time, offsetX, offsetY, easing) {
-      console.log('我输出了---scrollToElement：')
-      // this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
-      this.scroll && this.scroll.scrollToElement(el, time, offsetX, offsetY, easing)
+      // 用apply 只是为了在参数不确定去使用，其实下面的方法也可以
+      this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
+      // this.scroll && this.scroll.scrollToElement(el, time, offsetX, offsetY, easing)
     },
     scrollTo (x, y, time, easing) {
-      console.log('我输出了---scrollTo：')
-      // this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
-      this.scroll && this.scroll.scrollTo(x, y, time, easing)
+      this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
+      // this.scroll && this.scroll.scrollTo(x, y, time, easing)
     }
   }
 }

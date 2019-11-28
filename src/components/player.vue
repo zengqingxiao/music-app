@@ -345,6 +345,7 @@ export default {
       this.togglePlay(true)
       this.touchBarWillMove = false
     },
+    // 歌词格式化
     initLines () {
       this.lyricLines = []
       if (this.lyricData) {
@@ -365,6 +366,7 @@ export default {
         }
       }
     },
+    // scoll是根据第几条去滚动的，歌曲滚动
     moveLyric () {
       this.currentLineNumber = this.findCurrentNumber(this.currentTime * 1000)
       if (this.currentLineNumber > 6) {
@@ -373,6 +375,7 @@ export default {
         this.$refs.lyricScroll.scrollTo(0, 0, 1000)
       }
     },
+    // 当前第几条
     findCurrentNumber (time) {
       for (let i = 0; i < this.lyricLines.length; i++) {
         if (time < this.lyricLines[i].time) {
